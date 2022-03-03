@@ -6,7 +6,7 @@ dry your umbrella
 
 ##
 ### environment
-Device : Arduino Wemos board + ESP8266 Wifi
+Device : Arduino Wemos r1 d1 board + ESP8266 Wifi
 
 ##
 ### How to Run
