@@ -7,6 +7,7 @@ dry your umbrella
 ##
 ### environment
 Device : Arduino Wemos r1 d1 board + ESP8266 Wifi
+DB : FireBase
 
 ##
 ### How to Run
