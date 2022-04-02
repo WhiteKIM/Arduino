@@ -3,6 +3,14 @@ void eeprom_setup()
   EEPROM.begin(4096);
 }
 
+void eeprom_clear()
+{
+  for(int i=0; i<EEPROM.length(); i++)
+  {
+    EEPROM.write(i,0);
+  }
+}
+
 void eeprom_write(int address, String data)
 {
   for(int i=0; i< data.length(); i++)

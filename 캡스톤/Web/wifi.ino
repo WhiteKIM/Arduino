@@ -68,6 +68,7 @@ boolean wifi_connect()
   {
     Serial.println();
     Serial.println("Connected");
+    Serial.println(WiFi.localIP());
     return true;
   }
   else
@@ -116,7 +117,6 @@ void softAp_setup()
   Serial.print("Setting softAP....");
   if(WiFi.softAP(ssid_AP,pass_AP))
   {
-    Serial.println("Hello AP MODE");
     Serial.println("Succeed");
     Serial.println();
     Serial.print("AP SSID: ");
