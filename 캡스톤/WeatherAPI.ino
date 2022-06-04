@@ -1,6 +1,7 @@
 #include "time.h"
 #include "FirebaseESP8266.h" 
 #include <ArduinoJson.h>
+#include <ESP8266HTTPClient.h> 
 
 void SetWeather(String category, String item)
 {
@@ -23,6 +24,7 @@ void SetWeather(String category, String item)
    if(category=="SNO")
       Snow = item;
 }
+
 
 void GetWeather()
 {
@@ -61,7 +63,6 @@ void printLocalTime()
   struct tm * timeinfo;
   timeinfo = localtime(&now);
   delay(1000);
-  Serial.printf("현재시간 %d시%d%분%d초\n", timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);
 }
 
 void GetTimeData()
@@ -77,7 +78,7 @@ void GetTimeData()
   int result = year*10000+mon*100+day;
   user_data = String(result);
   
-  Serial.printf("오늘날짜 %s \n",user_data);
+  //Serial.printf("오늘날짜 %s \n",user_data);
 }
 
 //기상청 api호출을 위해 조회할 시간을 결정
@@ -91,8 +92,8 @@ void SetFcstTime()
   int minute = (timeinfo->tm_min);
   int result = hour*100+minute;
   nowTime = hour*100;
-  Serial.println(nowTime);
-  Serial.println(result);
+  //Serial.println(nowTime);
+  //Serial.println(result);
   if(200<=result && result< 500)
   {
     fcsttime = "0200";
@@ -125,7 +126,7 @@ void SetFcstTime()
   {
     fcsttime = "2300";
   }
-  Serial.println(fcsttime);
+  //Serial.println(fcsttime);
 }
 
 //Get Weather INFO From korea Meteorological Agency
@@ -134,20 +135,22 @@ void getData()
 {
   SetFcstTime();
   delay(1000);
-  String url = server1+key+pageno+row+type+date+user_data+basetime+fcsttime+nx+x+ny+y;
+  String url = server1+apikey+pageno+row+type+date+user_data+basetime+fcsttime+nx+x+ny+y;
   Serial.println(url);
   if(WiFi.status()==WL_CONNECTED)
   {
     Serial.println("Connecting to Server");
     HTTPClient http;
-    http.begin(wificlient, url);
+    http.begin(wificlient,url);
     int httpCode = http.GET();
+    Serial.printf("HTTPCODE : %d \n", httpCode);
     if(httpCode > 0)
     {
-      DynamicJsonDocument doc(12288);
+      DynamicJsonDocument doc(7000);
       
-      String payload =http.getString();
-      DeserializationError error = deserializeJson(doc, payload);
+      //String payload =http.getString();
+      //http.useHTTP10(true);
+      DeserializationError error = deserializeJson(doc, http.getString());
       if (error) {
         Serial.print(F("deserializeJson() failed: "));
         Serial.println(error.f_str());

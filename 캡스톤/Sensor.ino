@@ -24,8 +24,7 @@ void takeUmbrella()
   if(PTY=="1" && umbrella && isHuman)
   {
     //비가 오면 우산을 가져가요
-    Serial.println("우산가져간다");
-    SoundMode();
+    //SoundMode();
     delay(1000);
     IRSensor(); //가져가는지 확인
     delay(1000);
@@ -55,13 +54,13 @@ void IRSensor()
   {
     Serial.println("우산있음");
     umbrella = true;
-    Serial.println(digitalRead(d3));
+    //Serial.println(digitalRead(d3));
   }
   else
   {
     Serial.println("우산없음");
     umbrella = false;
-    Serial.println(digitalRead(d3));
+    //Serial.println(digitalRead(d3));
   }
 }
 
@@ -75,10 +74,12 @@ void motor()
   //우산이 존재하고 사용되었을때
   while(activation_time < fif && umbrella && damp)
   {
+    Serial.print("on");
     digitalWrite(d7 ,HIGH);
     IRSensor();
     RainySensor();      
   }
+  Serial.print("off");
   digitalWrite(d7 ,LOW);
 }
 //비가 안온데요 그래서 테스트모드가 필요해요
