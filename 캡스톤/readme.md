@@ -12,7 +12,7 @@
 This Project is using Arduino Board and Implement IOT umbrella basket.
 
 ## Using Environment
-1. Wemos d1 r1(Compatible Arduino Board)
+1. Wemos d1 r1(Compatible Arduino Board) x 2
 2. DC Fan Motor x 2
 3. IR Sensor x 2
 4. Water Sensor
