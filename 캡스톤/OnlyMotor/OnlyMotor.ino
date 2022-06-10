@@ -1,3 +1,10 @@
+/*
+* @ Author by Whitekim
+* @ 2022.06.08
+* @ 모터와 스피커를 통한 기능 구현
+* @ 날씨 변수와 위치 변수는 
+*/
+
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
