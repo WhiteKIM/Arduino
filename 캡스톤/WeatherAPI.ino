@@ -28,30 +28,28 @@ void SetWeather(String category, String item)
 
 void GetWeather()
 {
-  Serial.printf("현재 기온은 %s℃입니다 \n", temper);
-  Serial.printf("현재 풍향은 %s 입니다 \n", Wind_Direction);
-  Serial.printf("현재 풍속은 %sm/s입니다 \n", Wind_Speed);
+  Serial.printf("temperature %s℃\n", temper);
   if(Sky=="1")
-    Serial.printf("현재 날씨는 맑음입니다 \n");
+    Serial.printf("cleary\n");
    else if(Sky=="3")
-    Serial.printf("현재 날씨는 구름많음입니다. \n");
+    Serial.printf("many cloud\n");
    else
-    Serial.printf("현재 날씨는 흐림입니다 \n");
-  Serial.printf("강수 확률은 %s%% 입니다 \n", POP);
+    Serial.printf("cloudy\n");
+  Serial.printf("can rainy per %s%%\n", POP);
   if(PTY=="0")
-    Serial.printf("비가 오지 않습니다 \n");
+    Serial.printf("not rain \n");
   else if(PTY=="1")
-    Serial.printf("시간당 강수율은 %s%% 입니다 \n", PCP);
+    Serial.printf("per hour rain is %s%%\n", PCP);
   else if(PTY=="2")
-    Serial.printf("시간당 강수율은 %s%% 입니다 \n", PCP);
+    Serial.printf("per hour rain is %s%%\n", PCP);
   else if(PTY=="3")
   {
-    Serial.printf("현재 눈이 오고 있습니다 \n");
-    Serial.printf("시간당 적설량은 %s cm입니다 \n", Snow);
+    Serial.printf("snowing \n");
+    Serial.printf("snow per hour is%s cm \n", Snow);
   }
   else
-    Serial.printf("시간당 강수율은 %s%% 입니다 \n", PCP);
-  Serial.printf("현재 습도는 %s%% 입니다 \n", REH);
+    Serial.printf("rain per hour is %s%%\n", PCP);
+  Serial.printf("now humidity is %s%% \n", REH);
 }
 
 //Printing to Serial monital by present time 
@@ -92,8 +90,6 @@ void SetFcstTime()
   int minute = (timeinfo->tm_min);
   int result = hour*100+minute;
   nowTime = hour*100;
-  //Serial.println(nowTime);
-  //Serial.println(result);
   if(200<=result && result< 500)
   {
     fcsttime = "0200";
@@ -136,20 +132,15 @@ void getData()
   SetFcstTime();
   delay(1000);
   String url = server1+apikey+pageno+row+type+date+user_data+basetime+fcsttime+nx+x+ny+y;
-  Serial.println(url);
   if(WiFi.status()==WL_CONNECTED)
   {
     Serial.println("Connecting to Server");
     HTTPClient http;
     http.begin(wificlient,url);
     int httpCode = http.GET();
-    Serial.printf("HTTPCODE : %d \n", httpCode);
     if(httpCode > 0)
     {
       DynamicJsonDocument doc(7000);
-      
-      //String payload =http.getString();
-      //http.useHTTP10(true);
       DeserializationError error = deserializeJson(doc, http.getString());
       if (error) {
         Serial.print(F("deserializeJson() failed: "));

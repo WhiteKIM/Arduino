@@ -70,28 +70,15 @@ boolean wifi_connection = true;
 FirebaseData firebaseData;
 FirebaseJson json;
 
-// begin 음악 코드
-/*
-unsigned long prevPlayTime = 0;
-unsigned long playDuration = 0;
-int currentMelody = 0;
-
-int melodySize = 75;
-*/
 // Arudino Pin number . if not work check your board pin map
 int d6 = 12; //우산 빗물 센서
 int d4 = 4;  //모터
 int d5 = 14; //인체
 int d7 = 13; // 모터
 int d3 = 5; // IR
-int d8 = 0; // Speaker
 
 //end
 int counter = 60;   // in loop() delay * counter = loop time 
-
-//wifi name % pwd setting
-//String ssid = "Simpletest"; //enter the your wifi ssid
-//String wifi_pass ="simpletest";   // enter the your wifi pwd
 
 WiFiClient wificlient;
 
@@ -104,8 +91,7 @@ void setup() {
   pinMode(d6, INPUT);
   pinMode(d5, INPUT);
   pinMode(d4,OUTPUT);
-  pinMode(d7,OUTPUT);
-  pinMode(d8,OUTPUT);  
+  pinMode(d7,OUTPUT);  
   Serial.begin(9600);
   eeprom_setup();
   wifi_setup();
@@ -113,15 +99,8 @@ void setup() {
 
   if(wifi_connection)
   {
-    while(WiFi.status()!= WL_CONNECTED)
-    {
-      Serial.print(".");
-      delay(300);
-    }
-    Serial.print("Saved Wifi :");
+    Serial.print("Wifi SSID :");
     Serial.println(WiFi.SSID());
-    Serial.print("IP address: ");
-    Serial.println(WiFi.localIP());
     Firebase.begin(Firebase_host, Firebase_pass);
     Firebase.reconnectWiFi(true);
 

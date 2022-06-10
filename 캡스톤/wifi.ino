@@ -3,8 +3,6 @@
 void wifi_setup()
 {
   eeprom_wifi_read();
-  Serial.print("Saved Wifi :");
-  Serial.println(ssid);
   if((String) ssid == "NO SSID")
   {
     Serial.println("Wifi not saved");
@@ -31,8 +29,6 @@ void wifi_setup()
 boolean wifi_connect()
 {
   delay(10);
-  Serial.print("Connecting to ");
-  Serial.println(ssid);
   WiFi.mode(WIFI_STA);
   WiFi.begin(ssid, pass);
   

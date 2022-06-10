@@ -9,12 +9,10 @@ void GetLocationData()
  if(Firebase.getString(firebaseData, "DBConnect/Users/10001/location/latitude"))
  {
    latit = (firebaseData.stringData()).toDouble();
-   Serial.println(latit);
  }
  if(Firebase.getString(firebaseData, "DBConnect/Users/10001/location/longitude"))
  {
    longi = (firebaseData.stringData()).toDouble();
-   Serial.println(longi);
  }
 }
 

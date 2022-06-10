@@ -5,13 +5,13 @@ void RainySensor()
 {
   if(analogRead(d6) < 400)
   {
-    Serial.println(analogRead(d6));
+    Serial.println("no water");
     damp = false;
     delay(1000);
   }
   else
   {
-    Serial.println(analogRead(d6));
+    Serial.println("water");
     damp = true;
     delay(1000);
   }
@@ -20,15 +20,15 @@ void RainySensor()
 //비온다 우산가지고가
 void takeUmbrella()
 {
-  Serial.println("날씨 "+PTY);
   if(PTY=="1" && umbrella && isHuman)
   {
     //비가 오면 우산을 가져가요
-    //SoundMode();
+    Firebase.setInt(firebaseData, "DBConnect/Users/10001/take_state", 1);
     delay(1000);
     IRSensor(); //가져가는지 확인
     delay(1000);
   }
+  Firebase.setInt(firebaseData, "DBConnect/Users/10001/take_state", 0);
 }
 
 // 적외선 인체감지센서
@@ -38,12 +38,12 @@ void HumanSensor()
   {
     isHuman = true;
     takeUmbrella();
-    Serial.println(digitalRead(d5));
+    Serial.println("human");
   }
   else
   {
     isHuman = false;
-    Serial.println(digitalRead(d5));
+    Serial.println("no human");
   }
 }
 
@@ -52,15 +52,13 @@ void IRSensor()
 {
   if(LOW== digitalRead(d3))
   {
-    Serial.println("우산있음");
+    Serial.println("umb");
     umbrella = true;
-    //Serial.println(digitalRead(d3));
   }
   else
   {
-    Serial.println("우산없음");
+    Serial.println("no umb");
     umbrella = false;
-    //Serial.println(digitalRead(d3));
   }
 }
 
@@ -74,12 +72,14 @@ void motor()
   //우산이 존재하고 사용되었을때
   while(activation_time < fif && umbrella && damp)
   {
-    Serial.print("on");
+    Firebase.setInt(firebaseData,"/DBConnect/Users/10001/run_motor", 1);
+    Firebase.setString(firebaseData,"/DBConnect/Users/10001/state", "on");
     digitalWrite(d7 ,HIGH);
     IRSensor();
     RainySensor();      
   }
-  Serial.print("off");
+  Firebase.setInt(firebaseData,"/DBConnect/Users/10001/run_motor", 0);
+  Firebase.setString(firebaseData,"/DBConnect/Users/10001/state", "off");
   digitalWrite(d7 ,LOW);
 }
 //비가 안온데요 그래서 테스트모드가 필요해요
