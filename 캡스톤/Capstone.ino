@@ -1,6 +1,6 @@
 
 /*
- * @ 2022.6.1
+ * @ 2022.6.8
  * @ UPDATE INFO
  * @ Split the code to use Function and Define
  * @ Add input Wifi info use Web Document
