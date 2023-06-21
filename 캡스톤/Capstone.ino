@@ -23,7 +23,7 @@ using namespace std;
 
 //Firebase 주소 및 pwd 설정
 #define Firebase_host "internet-of-umbrella-default-rtdb.firebaseio.com/"  //enter the your firebase project url
-#define Firebase_pass "lTEDV27cNLqMUsdwWOQY4vX6LxajTNWH46N4RDuJ"    //enter the your firebase project pwd
+#define Firebase_pass ""    //enter the your firebase project pwd
 
 #define NX 149 /* X축 격자점 수 */
 #define NY 253 /* Y축 격자점 수 */
