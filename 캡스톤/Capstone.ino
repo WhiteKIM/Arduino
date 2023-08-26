@@ -23,7 +23,7 @@ using namespace std;
 
 //Firebase 주소 및 pwd 설정
 #define Firebase_host "internet-of-umbrella-default-rtdb.firebaseio.com/"  //enter the your firebase project url
-#define Firebase_pass "lTEDV27cNLqMUsdwWOQY4vX6LxajTNWH46N4RDuJ"    //enter the your firebase project pwd
+#define Firebase_pass ""    //enter the your firebase project pwd
 
 #define NX 149 /* X축 격자점 수 */
 #define NY 253 /* Y축 격자점 수 */
@@ -35,7 +35,7 @@ bool isHuman = false;
 
 //날씨 api 주소
 const String server1 ="http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey="; // korea weather api host url
-const String apikey = "qZCP9%2BU9bBXMk8BDFspW8MdaxGUGL0Vt4nvgA6%2FLdVb9XD6Sa8X05NLpnx60iOisK2WMN7C7nIFlvUzScJYQ1g%3D%3D";  // data.go.kr 일반인증키
+const String apikey = "";  // data.go.kr 일반인증키
 const String pageno ="&pageNo=1"; //view data page num
 const String row = "&numOfRows=36";
 const String type ="&dataType=JSON";  // data type JSON / XML
